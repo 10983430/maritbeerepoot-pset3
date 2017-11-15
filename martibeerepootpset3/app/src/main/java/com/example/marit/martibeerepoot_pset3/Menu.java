@@ -35,6 +35,8 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        getData();
+
         Intent intent = getIntent();
         category = (String) intent.getSerializableExtra("SelectedItem");
         TextView placeholder = (TextView) findViewById(R.id.placeholder);
@@ -98,6 +100,7 @@ public class Menu extends AppCompatActivity {
 
     public void navItem(String selecteditem) {
         Intent intent = new Intent(this, Item.class);
+        intent.putExtra("CategoryItem", category);
         intent.putExtra("SelectedItem", selecteditem);
         startActivity(intent);
     }

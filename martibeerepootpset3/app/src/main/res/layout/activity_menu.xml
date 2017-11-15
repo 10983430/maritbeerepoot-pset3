@@ -16,7 +16,7 @@ tools:context="com.example.marit.martibeerepoot_pset3.Menu">
     android:textSize="40sp"
     android:textStyle="bold" />
 
-<ListView
+    <ListView
     android:id="@+id/menulist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
