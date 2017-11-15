@@ -11,35 +11,69 @@ import com.android.volley.toolbox.Volley;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    public ArrayList info = new ArrayList();
+    public TextView test;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public ArrayList getTextJSON (String string) throws JSONException {
+        ArrayList<String> categories = new ArrayList<String>();
+        try {
+            // The following code is from the android developers website
+            JSONObject object = (JSONObject) new JSONTokener(string).nextValue();
+            JSONArray cat = object.getJSONArray("categories");
+            // Loop through JSONArray to add the items to an Arraylist
+            for (int i = 0; i < cat.length(); i++) {
+                categories.add(cat.get(i).toString());
+            }
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+        return categories;
+    }
 
-        // Code source: https://developer.android.com/training/volley/simple.html
-        //public void getData() {
-        final TextView mTextView = (TextView) findViewById(R.id.textView);
-        // Instantiate the RequestQueue.
+    public void getData(){
+        final TextView test = (TextView) findViewById(R.id.textView);
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://resto.mprog.nl/menu";
+        String url = "https://resto.mprog.nl/categories";
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: " + response);
+                       // mTextView.setText("Response is: " + response);
+                        try {
+                            info = getTextJSON(response);
+                            test.setText(info.toString());
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
-                mTextView.setText("That didn't work!");
+                test.setText("That didn't work!");
             }
         });
         queue.add(stringRequest);
-        //}
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //final TextView test = (TextView) findViewById(R.id.textView);
+        getData();
+
+
     }
 }
