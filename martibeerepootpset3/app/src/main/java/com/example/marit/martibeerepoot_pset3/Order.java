@@ -51,8 +51,9 @@ public class Order extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("settings",Context.MODE_PRIVATE);
         String s = preferences.getString("list", null);
         PersonalOrder.setJson(s);
+
         size = PersonalOrder.size();
-        TextView count = (TextView) findViewById(R.id.textView5);
+        TextView count = (TextView) findViewById(R.id.count);
         count.setText("You currently have " + String.valueOf(size) + " items in your order.");
 
         makelistview(PersonalOrder.getOrders());
@@ -106,8 +107,14 @@ public class Order extends AppCompatActivity {
     }
 
     public void click(View v){
-        getData();
-        Toast.makeText(this, "Order placed", Toast.LENGTH_LONG).show();
+        //int size = PersonalOrder.size()
+        if (PersonalOrder.size() != 0) {
+            getData();
+            Toast.makeText(this, "Order placed", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this, "You can't place an empty order", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void getData() {

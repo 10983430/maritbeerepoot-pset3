@@ -16,11 +16,18 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
+
     <ListView
         android:id="@+id/catList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"></ListView>
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -29,6 +36,7 @@
         android:layout_gravity="start"
         design:menu="@menu/bottom_nav_items"
         />
+
 
 
 </LinearLayout>

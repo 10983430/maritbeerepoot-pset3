@@ -55,13 +55,16 @@ public class Item extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
         preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
+
         Intent intent = getIntent();
         category = (String) intent.getSerializableExtra("CategoryItem");
         item = (String) intent.getSerializableExtra("SelectedItem");
+
         TextView placeholder = (TextView) findViewById(R.id.placeholder);
         placeholder.setText(item);
 
         findViewById(R.id.button).setOnClickListener(new Click());
+
         queue = Volley.newRequestQueue(this);
         getData();
 
@@ -98,7 +101,7 @@ public class Item extends AppCompatActivity {
             for (int i = 0; i < cat.length(); i++) {
                 if(Objects.equals(cat.getJSONObject(i).getString("name"), item)) {
                     desholder.setText(cat.getJSONObject(i).getString("description"));
-                    priceholder.setText(cat.getJSONObject(i).getString("price"));
+                    priceholder.setText("$" + cat.getJSONObject(i).getString("price"));
                     image_url = cat.getJSONObject(i).getString("image_url");
                 }
             }

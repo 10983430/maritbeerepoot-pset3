@@ -34,6 +34,7 @@ public class Menu extends AppCompatActivity {
     public ArrayList<String> info = new ArrayList<>();
     public ArrayList<String> gerechten = new ArrayList<>();
     private BottomNavigationView mBottomNav;
+    int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,10 @@ public class Menu extends AppCompatActivity {
         category = (String) intent.getSerializableExtra("SelectedItem");
         TextView placeholder = (TextView) findViewById(R.id.placeholder);
         placeholder.setText(category);
+
+        size = PersonalOrder.size();
+        TextView count = (TextView) findViewById(R.id.count);
+        count.setText("You currently have " + String.valueOf(size) + " items in your order.");
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.getMenu().findItem(R.id.Menu).setChecked(true);
@@ -61,6 +66,15 @@ public class Menu extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    // This function makes sure the right count of items in the order is displayed, when back navigation is used
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        size = PersonalOrder.size();
+        TextView count = (TextView) findViewById(R.id.count);
+        count.setText("You currently have " + String.valueOf(size) + " items in your order.");
     }
 
     public void navOrder() {
