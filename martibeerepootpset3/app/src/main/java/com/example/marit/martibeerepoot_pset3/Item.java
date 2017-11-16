@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,12 +43,14 @@ public class Item extends AppCompatActivity {
     Drawable temp;
     InformationOrder itempje;
     RequestQueue queue;
+    private SharedPreferences preferences;
+
     public ArrayList<String> gerechten = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-
+        preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
         Intent intent = getIntent();
         category = (String) intent.getSerializableExtra("CategoryItem");
         item = (String) intent.getSerializableExtra("SelectedItem");
@@ -135,12 +138,18 @@ public class Item extends AppCompatActivity {
             String price = priceholder.getText().toString();
             TextView placeholder = (TextView) findViewById(R.id.placeholder);
             String name = placeholder.getText().toString();
-            InformationOrder itempje = new InformationOrder();
-            itempje.handledata(name, price);
-            /*SharedPreferences prefs = this.getSharedPreferences("settings", this.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("string_id", InputString); //InputString: from the EditText
-            editor.commit();*/
+
+            PersonalOrder.addOrder(new InformationOrder(name, price));
+            JSONArray array = new JSONArray();
+
+            for(int i = 0; i < PersonalOrder.size(); i++) {
+                array.put(PersonalOrder.get(i).toJsonObject());
+            }
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("list", array.toString());
+            editor.apply();
+
         }
     }
 }
