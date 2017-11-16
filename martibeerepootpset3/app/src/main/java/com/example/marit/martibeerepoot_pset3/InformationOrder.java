@@ -38,7 +38,7 @@ public class InformationOrder implements Serializable {
     }
 
     public String toString() {
-        return item + " - $" + price;
+        return item + " - " + price;
     }
 
     public JSONObject toJsonObject () {

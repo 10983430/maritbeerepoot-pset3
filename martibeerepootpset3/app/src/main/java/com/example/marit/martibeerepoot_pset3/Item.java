@@ -102,7 +102,7 @@ public class Item extends AppCompatActivity {
             for (int i = 0; i < cat.length(); i++) {
                 if(Objects.equals(cat.getJSONObject(i).getString("name"), item)) {
                     desholder.setText(cat.getJSONObject(i).getString("description"));
-                    priceholder.setText(cat.getJSONObject(i).getString("price"));
+                    priceholder.setText("$" + cat.getJSONObject(i).getString("price"));
                     image_url = cat.getJSONObject(i).getString("image_url");
                 }
             }
