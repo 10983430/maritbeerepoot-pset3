@@ -7,9 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,6 +47,7 @@ public class Item extends AppCompatActivity {
     InformationOrder itempje;
     RequestQueue queue;
     private SharedPreferences preferences;
+    private BottomNavigationView mBottomNav;
 
     public ArrayList<String> gerechten = new ArrayList<>();
     @Override
@@ -60,6 +64,26 @@ public class Item extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new Click());
         queue = Volley.newRequestQueue(this);
         getData();
+
+        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNav.getMenu().findItem(R.id.Menu).setChecked(true);
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.Menu:
+                        break;
+                    case R.id.Order:
+                        navOrder();
+                }
+                return false;
+            }
+        });
+    }
+
+    public void navOrder() {
+        Intent intent = new Intent(this, Order.class);
+        startActivity(intent);
     }
 
 

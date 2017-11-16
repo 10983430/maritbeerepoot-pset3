@@ -1,8 +1,11 @@
 package com.example.marit.martibeerepoot_pset3;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +33,8 @@ public class Menu extends AppCompatActivity {
     String category;
     public ArrayList<String> info = new ArrayList<>();
     public ArrayList<String> gerechten = new ArrayList<>();
+    private BottomNavigationView mBottomNav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,25 @@ public class Menu extends AppCompatActivity {
         TextView placeholder = (TextView) findViewById(R.id.placeholder);
         placeholder.setText(category);
 
+        mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNav.getMenu().findItem(R.id.Menu).setChecked(true);
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.Menu:
+                        break;
+                    case R.id.Order:
+                        navOrder();
+                }
+                return false;
+            }
+        });
+    }
+
+    public void navOrder() {
+        Intent intent = new Intent(this, Order.class);
+        startActivity(intent);
     }
 
     public ArrayList<String> getTextJSON(String string) throws JSONException {

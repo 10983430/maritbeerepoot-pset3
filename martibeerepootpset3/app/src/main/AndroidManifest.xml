@@ -21,6 +21,7 @@
         <activity android:name=".Order" />
         <activity android:name=".Menu" />
         <activity android:name=".Item" />
+        <activity android:name=".PlacedOrder"></activity>
     </application>
 
 </manifest>

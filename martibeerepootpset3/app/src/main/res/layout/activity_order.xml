@@ -9,33 +9,42 @@
 
     tools:context="com.example.marit.martibeerepoot_pset3.Order">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        tools:layout_editor_absoluteY="274dp" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/Restaurant"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:text="Order"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="36dp" />
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click on the item to remove it from the order"
+        android:textAlignment="center" />
 
     <ListView
         android:id="@+id/catList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"></ListView>
+
+    <Button
+        android:id="@+id/place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place Order"
+        android:onClick="click"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -44,4 +53,6 @@
         android:layout_gravity="start"
         design:menu="@menu/bottom_nav_items"
         />
+
+
 </LinearLayout>

@@ -37,11 +37,17 @@ public class MainActivity extends AppCompatActivity {
         getData();
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNav.getMenu().findItem(R.id.Menu).setChecked(true);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                navOrder();
-                return true;
+                switch (item.getItemId()) {
+                    case R.id.Menu:
+                        break;
+                    case R.id.Order:
+                        navOrder();
+                }
+                return false;
             }
         });
     }

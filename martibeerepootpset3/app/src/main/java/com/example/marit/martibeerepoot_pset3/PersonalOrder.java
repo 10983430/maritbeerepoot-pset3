@@ -35,6 +35,10 @@ public class PersonalOrder {
         return orders.size();
     }
 
+    public static void deleteItem(int index) {
+        orders.remove(index);
+    }
+
     public static void setJson(String json) {
         if(json == null) { return;}
         Log.d("TEST", json);

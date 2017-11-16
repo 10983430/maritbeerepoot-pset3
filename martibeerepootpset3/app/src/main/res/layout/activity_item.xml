@@ -79,7 +79,8 @@
                 android:text="Add to order"
                 design:layout_constraintBottom_toBottomOf="parent"
                 design:layout_constraintEnd_toEndOf="parent"
-                design:layout_constraintStart_toStartOf="@+id/guideline2" />
+                design:layout_constraintStart_toStartOf="@+id/guideline2"
+                android:onClick="clickes"/>
         </LinearLayout>
 
         <android.support.constraint.Guideline
