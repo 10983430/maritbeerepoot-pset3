@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         getData();
 
         Context context = getApplicationContext();
-        SharedPreferences preferences = getSharedPreferences("settings",Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
         String s = preferences.getString("list", null);
         PersonalOrder.setJson(s);
 
@@ -50,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.getMenu().findItem(R.id.Menu).setChecked(true);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNav.setOnNavigationItemSelectedListener(new navListener());
+    }
+
+    private class navListener implements BottomNavigationView.OnNavigationItemSelectedListener {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });
     }
 
     // This function makes sure the right count of items in the order is displayed, when back navigation is used

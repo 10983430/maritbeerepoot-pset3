@@ -54,7 +54,9 @@ public class Menu extends AppCompatActivity {
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.getMenu().findItem(R.id.Menu).setChecked(true);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNav.setOnNavigationItemSelectedListener(new navListener());
+    }
+        private class navListener implements BottomNavigationView.OnNavigationItemSelectedListener {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -65,7 +67,6 @@ public class Menu extends AppCompatActivity {
                 }
                 return false;
             }
-        });
     }
 
     // This function makes sure the right count of items in the order is displayed, when back navigation is used

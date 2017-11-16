@@ -70,7 +70,9 @@ public class Item extends AppCompatActivity {
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.getMenu().findItem(R.id.Menu).setChecked(true);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNav.setOnNavigationItemSelectedListener(new navListener());
+    }
+    private class navListener implements BottomNavigationView.OnNavigationItemSelectedListener {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
@@ -81,8 +83,7 @@ public class Item extends AppCompatActivity {
                 }
                 return false;
             }
-        });
-    }
+        };
 
     public void navOrder() {
         Intent intent = new Intent(this, Order.class);
@@ -101,7 +102,7 @@ public class Item extends AppCompatActivity {
             for (int i = 0; i < cat.length(); i++) {
                 if(Objects.equals(cat.getJSONObject(i).getString("name"), item)) {
                     desholder.setText(cat.getJSONObject(i).getString("description"));
-                    priceholder.setText("$" + cat.getJSONObject(i).getString("price"));
+                    priceholder.setText(cat.getJSONObject(i).getString("price"));
                     image_url = cat.getJSONObject(i).getString("image_url");
                 }
             }

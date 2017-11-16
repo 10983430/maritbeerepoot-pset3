@@ -25,7 +25,9 @@ public class PlacedOrder extends AppCompatActivity {
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.getMenu().findItem(R.id.Order).setChecked(true);
-        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNav.setOnNavigationItemSelectedListener(new navListener());
+    }
+        private class navListener implements BottomNavigationView.OnNavigationItemSelectedListener {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -36,7 +38,6 @@ public class PlacedOrder extends AppCompatActivity {
                 }
                 return false;
             }
-        });
     }
     public void navMenu() {
         Intent intent = new Intent(this, MainActivity.class);
