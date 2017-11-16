@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //navOrder();
+                navOrder();
                 return true;
             }
         });
@@ -99,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /*public void navOrder() {
+    public void navOrder() {
         Intent intent = new Intent(this, Order.class);
         startActivity(intent);
-    }*/
+    }
 
     public void navMenu(String selecteditem) {
         Intent intent = new Intent(this, Menu.class);

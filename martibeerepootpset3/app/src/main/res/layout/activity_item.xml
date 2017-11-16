@@ -16,12 +16,6 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,8 +39,7 @@
                 design:layout_constraintBottom_toTopOf="@+id/guideline"
                 design:layout_constraintEnd_toEndOf="parent"
                 design:layout_constraintStart_toStartOf="parent"
-                design:layout_constraintTop_toTopOf="parent"
-                design:srcCompat="@color/colorAccent" />
+                design:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/description"

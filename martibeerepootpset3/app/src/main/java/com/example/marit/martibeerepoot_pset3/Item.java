@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
@@ -39,6 +40,8 @@ public class Item extends AppCompatActivity {
     String image_url;
     String info;
     Drawable temp;
+    InformationOrder itempje;
+    RequestQueue queue;
     public ArrayList<String> gerechten = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,7 @@ public class Item extends AppCompatActivity {
         placeholder.setText(item);
 
         findViewById(R.id.button).setOnClickListener(new Click());
-
+        queue = Volley.newRequestQueue(this);
         getData();
     }
 
@@ -79,22 +82,16 @@ public class Item extends AppCompatActivity {
     }
 
     public void getData() {
-        RequestQueue queue = Volley.newRequestQueue(this);
+
         String url = "https://resto.mprog.nl/menu";
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        ImageView imgview = (ImageView) findViewById(R.id.imageView);
-                        TextView txt = (TextView) findViewById(R.id.textView6);
                         try {
                             info = getTextJSON(response);
-                            txt.setText(info);
-                            //temp = LoadImageFromWebOperations(info);
-                            //imgview.setImageDrawable(temp);
-                            Context context = getApplicationContext();
-                            Picasso.with(context).load(info).into(imgview);
+                            getImage(info);
                         }
                         catch (IOException e) {
                             e.printStackTrace();
@@ -109,6 +106,18 @@ public class Item extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
+    }
+
+    public void getImage(String url){
+        final ImageView imgview = (ImageView) findViewById(R.id.imageView);
+        ImageRequest ir = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                imgview.setImageBitmap(response);
+            }
+        }
+        , 0 , 0, null, null);
+        queue.add(ir);
     }
     public static Drawable LoadImageFromWebOperations(String url) {
         try {
@@ -126,10 +135,12 @@ public class Item extends AppCompatActivity {
             String price = priceholder.getText().toString();
             TextView placeholder = (TextView) findViewById(R.id.placeholder);
             String name = placeholder.getText().toString();
-            SharedPreferences prefs = this.getSharedPreferences("settings", this.MODE_PRIVATE);
+            InformationOrder itempje = new InformationOrder();
+            itempje.handledata(name, price);
+            /*SharedPreferences prefs = this.getSharedPreferences("settings", this.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("string_id", InputString); //InputString: from the EditText
-            editor.commit();
+            editor.commit();*/
         }
     }
 }
